@@ -1,14 +1,16 @@
 //import { DataTypes } from 'sequelize';
+require("dotenv").config()
+
 const { Sequelize, DataTypes } = require('sequelize');
 
 //ORM Modelo relacionar objeto (Objetc Relationship Model)
 
 const sequelize = new Sequelize({
-    dialect: 'postgres',
-    host: 'localhost',
-    database: 'castlesoft',
-    username: 'postgres',
-    password: 'root'
+    dialect: process.env.DB_DIALECT,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD
   });
 
 
