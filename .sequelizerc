@@ -1,0 +1,9 @@
+const path = require('path'); //path permite manejar rutas del SO en el cual se encuentre
+//const { config } = require('process');
+
+module.exports = {
+    config: path.resolve(__dirname,"src", 'db', 'config.js'),
+    'models-path': path.resolve(__dirname, "src", 'db', 'models'),
+    'seeders-path': path.resolve(__dirname, "src", 'db', 'seeders'),
+    'migrations-path': path.resolve(__dirname, "src", 'db', 'migrations')
+}

@@ -1,0 +1,12 @@
+# Node
+node_modules/
+
+#Entorno virutal
+
+.env
+
+# Docker
+.dockerignore
+
+
+
