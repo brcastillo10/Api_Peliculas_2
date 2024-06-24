@@ -16,6 +16,8 @@ app.use('/director', router.DirectorRutes);
 
 app.use('/studioproduction',router.EstudioRutes);
 
+app.use('/auth', router.UserRutes);
+
 app.listen(port, ()=>{
     console.log( `My server Online in port ${process.env.APP_PORT} http://localhost:${process.env.APP_PORT}`)
 });

@@ -1,6 +1,4 @@
-const { Where } = require("sequelize/lib/utils");
 const db = require("../db/models");
-const { where } = require("sequelize");
 const model = require("../db/models/generadopeliculas")(db.sequelize, db.Sequelize);
 
 
