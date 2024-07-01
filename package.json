@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "build": "echo 'La buid no esta definida'",
+    "build": "echo 'Hola soy build'",
     "test": "jest"
   },
   "keywords": [],
