@@ -4,7 +4,9 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "build": "echo 'No build step defined'",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Amua",
