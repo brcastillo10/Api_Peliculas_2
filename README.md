@@ -3,6 +3,7 @@
 Este proyecto es una API RESTful para gestionar una base de datos de películas, directores y estudios. Está construido con Node.js, Express, Sequelize y PostgreSQL. Además de esto tiene un pequeño test y un análisis de código mediante SonarQube
 
 ## La estructura del proyecto
+```sh
 El proyecto presenta la siguiente estrucuta:
 ├──.github\workflows
 │ ├── buil.yml
@@ -42,7 +43,7 @@ El proyecto presenta la siguiente estrucuta:
 ├── package-lock.json
 ├── README.md
 └── sonar-project.properties
-
+```
 ## Las instrucciones para configurar y ejecutar el proyecto localmente y Cómo clonar el repositorio y contribuir al proyecto..
 
 ### Prerrequisitos
