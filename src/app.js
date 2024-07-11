@@ -3,10 +3,8 @@ const express = require('express');
 require("dotenv").config()
 const port = process.env.APP_PORT
 const app = express();
-const models = require("./db/model_");
-const { where } = require('sequelize');
 const router = require('./routes');
-
+const path = require('path');
 
 app.use(express.json());
 
@@ -18,12 +16,13 @@ app.use('/studioproduction',router.EstudioRutes);
 
 app.use('/auth', router.UserRutes);
 
+app.get('/login',(req,res)=>{
+    res.sendFile(path.join(__dirname,'views', 'index.html'));
+});
+
 app.listen(port, ()=>{
     console.log( `My server Online in port ${process.env.APP_PORT} http://localhost:${process.env.APP_PORT}`)
 });
-
-
-
 
 
 

@@ -21,10 +21,10 @@ module.exports.findUser = async (data)=>{
 
     if(users.length > 0){
         let pass = await bcrypt.compare(data.password, users[0].password)
-        console.log(pass);
+      //  console.log(pass);
         return pass
     }
 
-    console.log(user)
-    return false;
+   // console.log(user)
+    return false;
 }

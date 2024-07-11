@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const UserController = require('../controller/userController');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 require("dotenv").config()
 
 
@@ -17,9 +18,14 @@ router.post('/register', async (req, res)=>{
 
 router.post('/login', async(req, res)=>{
     const {username, password}=req.body;
-    let user = await UserController.findUser({username, password});
-    res.status(404).send(user);
-})
+    let pass = await UserController.findUser({username, password});
+    if (pass){
+        const token = jwt.sign({username}, process.env.JWT_TOKEN_SECRET, {expiresIn: '1h'})
+        res.json({token});
+    } else{
+        res.status(401).send('Usuario o contraseña incorrecta');
+    }
+});
 
 module.exports = router
 
@@ -30,4 +36,4 @@ Postman:
     "username":"aaa",
     "password":"aaaa"
 }
- */
+ */
