@@ -5,18 +5,43 @@ const port = process.env.APP_PORT
 const app = express();
 const router = require('./routes');
 const path = require('path');
-
+const jwt = require('jsonwebtoken');
 app.use(express.json());
 
-app.use('/peliculas', router.PeliculaRoutes);
+//Middleware del token
 
-app.use('/director', router.DirectorRutes);
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return res.status(401).send({ message: 'No se proporcionó el token.' });
+    }
+  
+    const token = authHeader.split(' ')[1];
+    if (!token) {
+      return res.status(401).send({ message: 'Token malformado.' });
+    }
+  
+    jwt.verify(token, process.env.JWT_TOKEN_SECRET, (err, user) => {
+      if (err) {
+        return res.status(403).send({ message: 'Token Invalido.' });
+      }
+      req.user = user;
+      next();
+    });
+  };
 
-app.use('/studioproduction',router.EstudioRutes);
+
+//Rutas
+
+app.use('/peliculas', authenticateToken , router.PeliculaRoutes);
+
+app.use('/director', authenticateToken ,router.DirectorRutes);
+
+app.use('/studioproduction', authenticateToken,router.EstudioRutes);
 
 app.use('/auth', router.UserRutes);
 
-app.get('/login',(req,res)=>{
+app.get('/login', (req,res)=>{
     res.sendFile(path.join(__dirname,'views', 'index.html'));
 });
 
@@ -29,39 +54,17 @@ app.listen(port, ()=>{
 
 
 //LA clase anterior
-
 /*
-app.get('/peliculas', async (req,res)=>{
-    const pelicula = await models.pelicula.findAll();
-    res.send(pelicula);
-});
+POSTMAN:
 
-app.post('/peliculas', async (req,res)=>{
-    const {titulo, Año_publicacion, descripcion, categoria, calificaion} = req.body
-    const pelicula = await models.pelicula.create({titulo, Año_publicacion, descripcion, categoria, calificaion})
-    res.send(pelicula) 
-})
+acceder a la ruta protegida.
 
-app.put('/peliculas/:id', async (req, res)=>{
-    const peliID= req.params.peliID;
-    const {titulo, Año_publicacion, descripcion, categoria, calificaion} = req.body
-    const actualizarpelis = await models.pelicula.update(peliID, {titulo, Año_publicacion, descripcion, categoria, calificaion},{new:true});
-    if (!actualizarpelis){
-        return res.send("Error!, No se actualizo las peliculas")
-    }
-    res.send(actualizarpelis);
-});
+en Headers poner:
 
-app.delete('/peliculas/:id', async (req,res)=>{
-    const peliID = req.params.peliID;
-    const eliminarpeli = await models.pelicula.destroy(peliID);
-    if (!eliminarpeli){
-        return res.send("No se pudo eliminar la pelicula")
-    }
-    res.send(eliminarpeli);
-});
+Key: Authorization
 
- */
+Value: Bearer <TOKEN>
+*/
 
 
 

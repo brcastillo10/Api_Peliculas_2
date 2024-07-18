@@ -64,11 +64,20 @@ cd Api_Peliculas_2
 # Para instalar las dependencias
 npm install
 
+#Crear la base de datos en postgres y crear el ".env" en el proyecto con lo siguiente
+APP_PORT=______
+
+DB_DIALECT=______
+DB_HOST=______
+DB_NAME=______
+DB_USER=______
+DB_PASSWORD=______
+JWT_TOKEN_SECRET=______
+
 # Ejecutar en la consola el siguiente comando para migrar las tablas a la base de datos
 npx sequelize db:migrate
 
 # Ejecución del programa
-
 npm run dev
 
 # Ejecución de la pruebas
