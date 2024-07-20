@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CastleSoft</title>
+</head>
+<body>
+    <h1>Bienvenido a CastleSoft</h1>
+    <div id="user-info">
+        <!-- Los datos del usuario se mostrarán aquí -->
+    </div>
+    <button id="logout">Logout</button>
+
+    <script>
+    fetch('/api/user')
+      .then(response => response.json())
+      .then(user => {
+        const userInfoDiv = document.getElementById('user-info');
+        const img = document.createElement('img');
+        img.src = user.picture;
+        img.alt = `${user.displayName}'s profile picture`;
+        img.width = 100; // Ajusta el tamaño de la imagen según sea necesario
+        const name = document.createElement('p');
+        name.innerText = `Hola bienvenido, ${user.displayName}`;
+        const email = document.createElement('p');
+        email.innerText = `Correo Eletrónico: ${user.email}`;
+        userInfoDiv.appendChild(img);
+        userInfoDiv.appendChild(name);
+        userInfoDiv.appendChild(email);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+        // Manejar el logout
+        document.getElementById('logout').addEventListener('click', () => {
+            fetch('/logout', { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/login';
+                    } else {
+                        console.error('Failed to logout');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error logging out:', error);
+                });
+        });
+    </script>
+</body>
+</html>
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+</head>
+<body>
+  <h1>Welcome Home</h1>
+  <div id="user-info"></div>
+  <script>
+    fetch('/api/user')
+      .then(response => response.json())
+      .then(user => {
+        document.getElementById('user-info').innerText = `Hello, ${user.displayName}`;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  </script>
+</body>
+</html>
+-->

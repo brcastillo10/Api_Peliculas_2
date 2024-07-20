@@ -73,7 +73,9 @@ DB_NAME=______
 DB_USER=______
 DB_PASSWORD=______
 JWT_TOKEN_SECRET=______
-
+GOOGLE_CLIENT_ID=_______
+GOOGLE_CLIENT_SECRET=_______
+SESSION_SECRET=_______
 # Ejecutar en la consola el siguiente comando para migrar las tablas a la base de datos
 npx sequelize db:migrate
 
